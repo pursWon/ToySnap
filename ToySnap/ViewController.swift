@@ -18,7 +18,7 @@ class ViewController: UIViewController {
         setBackgroundColor()
         setConstraints()
         
-        button.setTitle("ISLAND", for: .normal)
+        button.setTitle("Push The Button", for: .normal)
         button.setTitleColor(.black, for: .normal)
         setAddTarget()
     }
@@ -40,7 +40,7 @@ class ViewController: UIViewController {
         
         button.snp.makeConstraints { make in
             make.width.height.equalTo(120)
-            make.trailing.bottom.equalToSuperview().inset(50)
+            make.edges.equalToSuperview()
         }
     }
     
@@ -53,12 +53,12 @@ class ViewController: UIViewController {
         
         orangeView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(170)
+            make.height.equalTo(200)
         }
         
         grayView.snp.remakeConstraints { make in
             make.bottom.leading.trailing.equalToSuperview()
-            make.height.equalTo(170)
+            make.height.equalTo(200)
         }
         
         grayView.backgroundColor = .systemGreen
