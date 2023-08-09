@@ -2,28 +2,72 @@ import UIKit
 import SnapKit
 
 class ViewController: UIViewController {
-    let redView: UIView = UIView()
+    let grayView: UIView = UIView()
     let orangeView: UIView = UIView()
-
+    let textLabel: UILabel = UILabel()
+    
+    let button: UIButton = UIButton()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.addSubview(redView)
-        view.addSubview(orangeView)
-        
-        redView.backgroundColor = .red
-        orangeView.backgroundColor = .orange
-        
-        redView.snp.makeConstraints { make in
-            make.top.equalTo(view.snp.top)
-            make.size.width.height.equalTo(100)
-            make.left.equalTo(view.snp.left)
+        [grayView, orangeView, textLabel, button].forEach {
+            view.addSubview($0)
         }
+        
+        setBackgroundColor()
+        setConstraints()
+        
+        button.setTitle("ISLAND", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        setAddTarget()
+    }
+    
+    func setBackgroundColor() {
+        grayView.backgroundColor = .lightGray
+        orangeView.backgroundColor = .orange
+        button.backgroundColor = .yellow
+    }
+    
+    func setConstraints() {
+        grayView.snp.makeConstraints { make in
+            make.top.bottom.leading.trailing.equalToSuperview()
+        }
+        
+        textLabel.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+        }
+        
+        button.snp.makeConstraints { make in
+            make.width.height.equalTo(120)
+            make.trailing.bottom.equalToSuperview().inset(50)
+        }
+    }
+    
+    func setAddTarget() {
+        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+    }
+    
+    @objc func buttonTapped() {
+        button.isHidden = true
         
         orangeView.snp.makeConstraints { make in
-            make.center.equalTo(view.snp.center)
-            make.size.width.height.equalTo(100)
+            make.top.leading.trailing.equalToSuperview()
+            make.height.equalTo(170)
         }
+        
+        grayView.snp.remakeConstraints { make in
+            make.bottom.leading.trailing.equalToSuperview()
+            make.height.equalTo(170)
+        }
+        
+        grayView.backgroundColor = .systemGreen
+        
+        textLabel.text = "Island"
+        
+        UIView.animate(withDuration: 1.0, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
 }
 
