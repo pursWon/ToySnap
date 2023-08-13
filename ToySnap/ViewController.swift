@@ -62,7 +62,6 @@ class ViewController: UIViewController {
         }
         
         grayView.backgroundColor = .systemGreen
-        
         textLabel.text = "Island"
         
         UIView.animate(withDuration: 1.0, animations: {
